@@ -32,15 +32,14 @@ export default async function Home() {
       <section className="hero" style={{ padding: '6rem 2rem', background: 'linear-gradient(to bottom, rgba(9,9,11,1) 0%, rgba(39,39,42,0.5) 100%)', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
           <h1 style={{ fontSize: '3.5rem', fontWeight: 800, marginBottom: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
-            Personaliza tu mundo financiero, <span style={{ color: 'var(--primary)' }}>sin límites.</span>
+            Tu tarjeta es aburrida. <span style={{ color: 'var(--primary)' }}>Cámbiale el estilo.</span>
           </h1>
           <p style={{ fontSize: '1.25rem', color: '#a1a1aa', marginBottom: '2.5rem', lineHeight: 1.6 }}>
-            Stickers adhesivos de alta calidad diseñados a medida para tus tarjetas de débito, crédito o de transporte. 
-            Exprésate con tus diseños favoritos sin afectar el chip, la banda magnética ni el funcionamiento en cajeros.
+            Olvídate del plástico genérico del banco. Viste tus tarjetas de débito, crédito o transporte con diseños únicos que representen tu estilo. Vinilo premium ultra-delgado, a prueba de agua y 100% compatible con cajeros y terminales.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
             <a href="#catalog" className="primary-button" style={{ textDecoration: 'none', display: 'inline-block' }}>
-              Ver el Catálogo
+              Explorar Colección
             </a>
             {userRole === 'admin' && (
               <Link href="/admin" className="primary-button" style={{ textDecoration: 'none', display: 'inline-block', background: 'transparent', border: '1px solid var(--primary)', color: 'var(--primary)' }}>
