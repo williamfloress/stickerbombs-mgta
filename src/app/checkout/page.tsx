@@ -17,7 +17,7 @@ export default async function CheckoutPage() {
     .eq('id', user.id)
     .single();
     
-  let profile = userProfile;
+  let profile: any = userProfile;
   // Fallback por si la columna 'telefono' aún no ha sido creada en la base de datos
   if (error && error.code === '42703') { // 42703 is undefined_column
     const { data: fallbackProfile } = await supabase
