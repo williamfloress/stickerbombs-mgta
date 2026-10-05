@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { login } from "./actions";
 
 export default async function LoginPage({
@@ -9,6 +10,9 @@ export default async function LoginPage({
   const resolvedParams = await searchParams;
   const error = resolvedParams?.error === 'true';
   const message = typeof resolvedParams?.message === 'string' ? resolvedParams.message : '';
+
+  const cookieStore = await cookies();
+  const rememberedEmail = cookieStore.get('rememberedEmail')?.value || '';
 
   return (
     <main className="container">
@@ -31,7 +35,8 @@ export default async function LoginPage({
                 id="email" 
                 name="email" 
                 className="form-input" 
-                placeholder="you@example.com" 
+                placeholder="you@example.com"
+                defaultValue={rememberedEmail}
                 required 
               />
             </div>
@@ -46,6 +51,19 @@ export default async function LoginPage({
                 placeholder="••••••••" 
                 required 
               />
+            </div>
+
+            <div className="form-group" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
+              <input 
+                type="checkbox" 
+                id="remember" 
+                name="remember" 
+                defaultChecked={!!rememberedEmail}
+                style={{ cursor: 'pointer' }}
+              />
+              <label htmlFor="remember" style={{ margin: 0, fontSize: '0.9rem', color: '#a1a1aa', cursor: 'pointer', fontWeight: 'normal' }}>
+                Recordar mi correo electrónico
+              </label>
             </div>
             
             <button type="submit" className="primary-button auth-button">
