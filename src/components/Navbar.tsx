@@ -19,6 +19,7 @@ export default function Navbar({
   const { totalItems } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isProfileHovered, setIsProfileHovered] = useState(false);
   
   const supabase = createClient();
   const router = useRouter();
@@ -48,22 +49,64 @@ export default function Navbar({
                 ) : (
                   <Link href="/dashboard" style={{ color: 'var(--foreground)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500 }}>Mi Panel</Link>
                 )}
-                <Link href="/profile" style={{ position: 'relative', color: 'var(--foreground)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '0.25rem' }} title={missingProfileInfo ? "Para mejorar tu experiencia, añade tu número de teléfono y dirección de envío." : "Configuración de Perfil"}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                  Perfil
-                  {missingProfileInfo && (
-                    <span style={{
+                <div 
+                  style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
+                  onMouseEnter={() => setIsProfileHovered(true)}
+                  onMouseLeave={() => setIsProfileHovered(false)}
+                >
+                  <Link href="/profile" style={{ position: 'relative', color: 'var(--foreground)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: 500, display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    Perfil
+                    {missingProfileInfo && (
+                      <span style={{
+                        position: 'absolute',
+                        top: '-2px',
+                        right: '-6px',
+                        width: '8px',
+                        height: '8px',
+                        backgroundColor: '#ef4444',
+                        borderRadius: '50%',
+                        boxShadow: '0 0 0 2px var(--background)'
+                      }}></span>
+                    )}
+                  </Link>
+
+                  {/* Tooltip Estilizado */}
+                  {isProfileHovered && missingProfileInfo && (
+                    <div style={{
                       position: 'absolute',
-                      top: '-2px',
-                      right: '-6px',
-                      width: '8px',
-                      height: '8px',
-                      backgroundColor: '#ef4444',
-                      borderRadius: '50%',
-                      boxShadow: '0 0 0 2px var(--background)'
-                    }}></span>
+                      top: 'calc(100% + 12px)',
+                      right: '0',
+                      width: 'max-content',
+                      maxWidth: '220px',
+                      padding: '0.75rem 1rem',
+                      background: 'rgba(24, 24, 27, 0.95)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: '8px',
+                      color: '#e4e4e7',
+                      fontSize: '0.8rem',
+                      lineHeight: 1.4,
+                      boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3)',
+                      backdropFilter: 'blur(8px)',
+                      zIndex: 50,
+                      pointerEvents: 'none'
+                    }}>
+                      <div style={{
+                        position: 'absolute',
+                        top: '-5px',
+                        right: '15px',
+                        width: '10px',
+                        height: '10px',
+                        background: 'rgba(24, 24, 27, 0.95)',
+                        borderTop: '1px solid rgba(255,255,255,0.1)',
+                        borderLeft: '1px solid rgba(255,255,255,0.1)',
+                        transform: 'rotate(45deg)'
+                      }}></div>
+                      <strong style={{ display: 'block', color: '#fde047', marginBottom: '0.25rem', fontSize: '0.85rem' }}>Perfil incompleto</strong>
+                      Para mejorar tu experiencia, añade tu número de teléfono y dirección de envío.
+                    </div>
                   )}
-                </Link>
+                </div>
                 <button onClick={handleLogout} style={{ background: 'transparent', border: 'none', color: '#a1a1aa', cursor: 'pointer', fontSize: '0.9rem' }}>Salir</button>
               </>
             ) : mounted && (
