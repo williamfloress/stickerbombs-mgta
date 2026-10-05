@@ -9,19 +9,14 @@ export default async function Home() {
   const { data: { user } } = await supabase.auth.getUser();
   let userRole = 'client';
   
-  let missingProfileInfo = false;
-  
   if (user) {
     const { data: userData } = await supabase
       .from('users')
-      .select('rol, direccion, telefono')
+      .select('rol')
       .eq('id', user.id)
       .single();
     if (userData) {
       userRole = userData.rol;
-      if (!userData.direccion || !userData.telefono) {
-        missingProfileInfo = true;
-      }
     }
   }
 
@@ -33,17 +28,6 @@ export default async function Home() {
 
   return (
     <main>
-      {missingProfileInfo && (
-        <div style={{ background: 'rgba(234, 179, 8, 0.1)', borderBottom: '1px solid rgba(234, 179, 8, 0.2)', padding: '0.75rem', textAlign: 'center' }}>
-          <p style={{ margin: 0, fontSize: '0.95rem', color: '#fde047' }}>
-            <span style={{ marginRight: '0.5rem' }}>👋</span>
-            <strong>¡Bienvenido!</strong> Para una experiencia más rápida al comprar, 
-            <Link href="/profile" style={{ color: '#fef08a', textDecoration: 'underline', marginLeft: '0.25rem', fontWeight: 600 }}>
-              configura tu teléfono y dirección aquí.
-            </Link>
-          </p>
-        </div>
-      )}
       {/* Hero Section */}
       <section className="hero" style={{ padding: '6rem 2rem', background: 'linear-gradient(to bottom, rgba(9,9,11,1) 0%, rgba(39,39,42,0.5) 100%)', textAlign: 'center' }}>
         <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>

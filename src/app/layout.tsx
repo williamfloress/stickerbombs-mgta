@@ -24,10 +24,15 @@ export default async function RootLayout({
   const { data: { user } } = await supabase.auth.getUser();
   let userRole = 'client';
 
+  let missingProfileInfo = false;
+
   if (user) {
-    const { data } = await supabase.from('users').select('rol').eq('id', user.id).single();
+    const { data } = await supabase.from('users').select('rol, direccion, telefono').eq('id', user.id).single();
     if (data) {
       userRole = data.rol;
+      if (!data.direccion || !data.telefono) {
+        missingProfileInfo = true;
+      }
     }
   }
 
@@ -35,7 +40,7 @@ export default async function RootLayout({
     <html lang="en" className={outfit.variable}>
       <body>
         <CartProvider>
-          <Navbar initialUser={user} initialUserRole={userRole} />
+          <Navbar initialUser={user} initialUserRole={userRole} missingProfileInfo={missingProfileInfo} />
           {children}
         </CartProvider>
       </body>
