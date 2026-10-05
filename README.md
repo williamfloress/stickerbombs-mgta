@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# StickerBomb V1
 
-## Getting Started
+StickerBomb es una plataforma de comercio electronico especializada en la venta de stickers decorativos para tarjetas de credito y debito. Esta version (V1) funciona como un Minimum Viable Product (MVP) diseñado para ofrecer una experiencia rapida, segura y con una estetica premium.
 
-First, run the development server:
+## Tecnologias Utilizadas
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+El proyecto fue desarrollado utilizando el siguiente stack tecnologico:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Frontend: Next.js (React)
+- Estilos: CSS puro (Vanilla CSS) enfocado en un diseño moderno, con soporte para variables, Grid, Flexbox y animaciones fluidas sin dependencias externas.
+- Backend y Base de Datos: Supabase (PostgreSQL) para la gestion de datos relacionales, almacenamiento y autenticacion.
+- Autenticacion: Supabase Auth.
+- Pagos: Integracion basica de pasarela de pago para la funcionalidad de checkout.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Caracteristicas Principales (V1)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Catalogo de Stickers: Galeria interactiva para explorar los diseños disponibles, visualizar detalles de los productos y agregarlos al carrito.
+- Visor de Previsualizacion (Simulador): Herramienta principal que permite al usuario seleccionar un diseño y previsualizarlo aplicado sobre la silueta de una tarjeta, simulando el recorte del chip y el resultado final.
+- Carrito de Compras: Gestion de productos seleccionados, calculo de totales e impuestos antes de la compra.
+- Sistema de Usuarios: Registro e inicio de sesion seguro para gestionar el historial de compras y la informacion de envio.
+- Gestion de Ordenes: Panel donde los usuarios pueden revisar sus pedidos anteriores y consultar el estado actual (Pendiente, Procesando, Enviado).
+- Checkout: Formulario para la recoleccion de datos de envio y simulacion del proceso de pago.
 
-## Learn More
+## Desarrollo Local
 
-To learn more about Next.js, take a look at the following resources:
+Para correr este proyecto en un entorno local:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Instala las dependencias del proyecto:
+   npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Configura las variables de entorno necesarias para Supabase en el archivo `.env.local`.
 
-## Deploy on Vercel
+3. Inicia el servidor de desarrollo:
+   npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Abre tu navegador en `http://localhost:3000`.
